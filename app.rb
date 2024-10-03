@@ -2,11 +2,7 @@ require "sinatra"
 require "sinatra/reloader"
 
 get("/") do
-  erb(:layout) do
-    #nested erb idea from: https://levelup.gitconnected.com/yield-in-yield-in-ruby-erb-for-sinatra-web-app-37d445363afe
-    #but leads to double header :(
-    erb(:square_new)
-  end
+  erb(:square_new)
 end
 
 get("/square/new") do
