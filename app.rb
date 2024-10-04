@@ -6,14 +6,29 @@ get("/") do
 end
 
 get("/square/new") do
-  @input = params.fetch("user_number").to_i
-  @square = @input ** 2
+  erb(:square_new)
+end
 
+get("/square/results") do
+  @action = "Square"
+  @input = params.fetch("number").to_i
+  @result = @input ** 2
+  @back_link = "/square/new"
+  @back_link_text = "Calculate another square"
+  erb(:results)
 end
 
 get("/square_root/new") do
-  @input = params.fetch("user_number").to_i
-  @square = @input ** (1/2)
+  erb(:square_root_new)
+end
+
+get("/square_root/results") do
+  @action = "Square Root"
+  @input = params.fetch("number").to_i
+  @result = Math.sqrt(@input)
+  @back_link = "/square_root/new"
+  @back_link_text = "Calculate another square root"
+  erb(:results)
 end
 
 get("/payment/new") do
@@ -22,11 +37,11 @@ get("/payment/new") do
   @principal = params.fetch("user_principal").to_f
   @numerator = @apr * @principal
   @denominator = 1 - ((1 + @apr) ** -@loan_term)
-  @payment = (@numerator/@denominator).to_fs(:currency, { :precision => 2 })
+  @result = (@numerator/@denominator).to_fs(:currency, { :precision => 2 })
 end
 
 get("/random/new") do
   @min = params.fetch("user_min").to_i
   @max = params.fetch("user_max").to_i
-  @rand_num = rand(@min..@max) 
+  @result = rand(@min..@max) 
 end

@@ -1,0 +1,10 @@
+<h1><%= "#{@action}" %> Results</h1>
+
+<% @params.each do |key, val| %>
+  <p><%= "#{key}".capitalize! %></p>
+  <p><%= "       #{val}" %></p>
+<% end %>
+  <p><%= "#{@action}" %></p>
+  <p><%= "      #{@result}" %></p>
+
+<a href=<%= "{@back_link}" %>><%= "#{@back_link_text}" %></a>
