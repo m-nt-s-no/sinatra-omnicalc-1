@@ -36,13 +36,13 @@ get("/payment/new") do
 end
 
 get("/payment/results") do
+  @action = "Payment"
   @apr = (params.fetch("apr").to_f / 100) / 12
   @loan_term = params.fetch("years").to_i * 12
   @principal = params.fetch("principal").to_f
   @numerator = @apr * @principal
   @denominator = 1 - ((1 + @apr) ** -@loan_term)
-  @result = (@numerator/@denominator).to_fs(:currency, { :precision => 2 })
-  @apr = @apr.to_fs(:percentage, {:precision => 4})
+  @result = (@numerator/@denominator)
   @back_link = "/payment/new"
   @back_link_text = "Calculate another payment"
   erb(:results)

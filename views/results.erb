@@ -1,6 +1,12 @@
 <h1><%= "#{@action}" %> Results</h1>
 
 <% @params.each do |key, val| %>
+  <% if key == "apr"%>
+    <% val = val.to_f.to_fs(:percentage, {:precision => 4})%>
+  <% elsif key == "principal"%>
+    <% val = val.to_f.to_fs(:currency, { :precision => 2 })%>
+    <% @result = @result.to_fs(:currency, { :precision => 2 })%>
+  <% end %>
   <p><%= "#{key}".capitalize! %></p>
   <p><%= "       #{val}" %></p>
 <% end %>
