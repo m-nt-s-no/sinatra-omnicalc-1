@@ -11,7 +11,7 @@ end
 
 get("/square/results") do
   @action = "Square"
-  @input = params.fetch("number").to_i
+  @input = params.fetch("number").to_f
   @result = @input ** 2
   @back_link = "/square/new"
   @back_link_text = "Calculate another square"
@@ -24,7 +24,7 @@ end
 
 get("/square_root/results") do
   @action = "Square Root"
-  @input = params.fetch("number").to_i
+  @input = params.fetch("number").to_f
   @result = Math.sqrt(@input)
   @back_link = "/square_root/new"
   @back_link_text = "Calculate another square root"
