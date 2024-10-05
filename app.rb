@@ -32,12 +32,20 @@ get("/square_root/results") do
 end
 
 get("/payment/new") do
-  @apr = (params.fetch("user_apr").to_f / 100) / 12
-  @loan_term = params.fetch("user_years").to_i * 12
-  @principal = params.fetch("user_principal").to_f
+  erb(:payment_new)
+end
+
+get("/payment/results") do
+  @apr = (params.fetch("apr").to_f / 100) / 12
+  @loan_term = params.fetch("years").to_i * 12
+  @principal = params.fetch("principal").to_f
   @numerator = @apr * @principal
   @denominator = 1 - ((1 + @apr) ** -@loan_term)
   @result = (@numerator/@denominator).to_fs(:currency, { :precision => 2 })
+  @apr = @apr.to_fs(:percentage, {:precision => 4})
+  @back_link = "/payment/new"
+  @back_link_text = "Calculate another payment"
+  erb(:results)
 end
 
 get("/random/new") do
