@@ -49,7 +49,15 @@ get("/payment/results") do
 end
 
 get("/random/new") do
-  @min = params.fetch("user_min").to_i
-  @max = params.fetch("user_max").to_i
+  erb(:random_new)
+end
+
+get("/random/results") do
+  @action = "Random"
+  @min = params.fetch("min").to_f
+  @max = params.fetch("max").to_f
   @result = rand(@min..@max) 
+  @back_link = "/random/new"
+  @back_link_text = "Pick another random number"
+  erb(:results)
 end

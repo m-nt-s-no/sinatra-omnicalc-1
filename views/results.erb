@@ -1,16 +1,28 @@
 <h1><%= "#{@action}" %> Results</h1>
 
+<dl>
 <% @params.each do |key, val| %>
   <% if key == "apr"%>
     <% val = val.to_f.to_fs(:percentage, {:precision => 4})%>
   <% elsif key == "principal"%>
     <% val = val.to_f.to_fs(:currency, { :precision => 2 })%>
     <% @result = @result.to_fs(:currency, { :precision => 2 })%>
+  <% elsif key == "years"%>
+    <% key = "number of years"%>
+  <%elsif key == "min" || key == "max"%>
+    <%key += "imum"%>
   <% end %>
-  <p><%= "#{key}".capitalize! %></p>
-  <p><%= "       #{val}" %></p>
+<% if key == "apr"%>
+  <dt><%= "#{key}".upcase! %></dt>
+<% else %>
+  <dt><%= "#{key}".capitalize! %></dt>
 <% end %>
-  <p><%= "#{@action}" %></p>
-  <p><%= "      #{@result}" %></p>
-
+  <dd><%= "#{val}" %></dd>
+<% end %>
+<% if @action == "Random"%>
+  <% @action += " Number"%>
+<% end %>
+  <dt><%= "#{@action}" %></dt>
+  <dd><%= "      #{@result}" %></dd>
+  </dl>
 <a href=<%= "#{@back_link}" %>><%= "#{@back_link_text}" %></a>
